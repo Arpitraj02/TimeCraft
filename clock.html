@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Times+New+Roman&display=swap">
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: #f8f8f8;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #topNav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #61dafb;
+            color: #ffffff;
+            height: 60px;
+            padding: 0 20px;
+        }
+
+        #appName {
+            font-size: 1.5em;
+        }
+
+        #bottomNav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #61dafb;
+            color: #ffffff;
+            height: 60px;
+        }
+
+        .navIcon {
+            font-size: 24px;
+        }
+
+        #content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #clock {
+            font-size: 4em;
+            margin: 10px;
+            color: #333;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #date {
+            font-size: 1.5em;
+            margin-top: 10px;
+        }
+    </style>
+    <title>Digital Clock with Nav</title>
+</head>
+<body>
+    <div id="topNav">
+        <div id="appName">My App</div>
+    </div>
+
+    <div id="content">
+        <div id="clock"></div>
+        <div id="date"></div>
+    </div>
+
+    <div id="bottomNav">
+        <div class="navIcon material-icons">compare_arrows</div>
+        <div class="navIcon material-icons">access_time</div>
+        <div class="navIcon material-icons">calendar_today</div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const clockElement = document.getElementById('clock');
+            const dateElement = document.getElementById('date');
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            const formattedDate = formatDate(now);
+
+            clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+            dateElement.textContent = formattedDate;
+        }
+
+        function formatDate(date) {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call to set the clock and date immediately
+    </script>
+</body>
+</html>
